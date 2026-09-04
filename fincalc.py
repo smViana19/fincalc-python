@@ -38,6 +38,21 @@ def calcular_juros_compostos(
     return montante
 
 
+def calcular_parcela_price(
+    valor_emprestimo: float,
+    taxa_mensal: float,
+    meses: int
+) -> float:
+    """Calcula o valor da parcela fixa pela Tabela Price."""
+    i = taxa_mensal / 100
+    parcela = (
+        valor_emprestimo
+        * (i * ((1 + i) ** meses))
+        / (((1 + i) ** meses) - 1)
+    )
+    return parcela
+
+
 if __name__ == "__main__":
     print("Iniciando o sistema FinCalc...")
 
@@ -56,3 +71,10 @@ if __name__ == "__main__":
 
     montante_comp = calcular_juros_compostos(1000.0, 5.0, 2)
     print(f"Juros Compostos: R$ {montante_comp:.2f}")
+
+    parcela = calcular_parcela_price(
+        10000.0,
+        2.0,
+        12
+    )
+    print(f"Parcela Price: R$ {parcela:.2f}")
