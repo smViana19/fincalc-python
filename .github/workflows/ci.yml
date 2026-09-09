@@ -46,12 +46,12 @@ jobs:
 
     - name: Validar Sintaxe (Compilação Nativa)
 
-      run: python -m py_compile src/fincalc.py
+      run: python -m py_compile fincalc.py
 
 
     - name: Executar Linter de Estilo e Boas Práticas (Flake8)
 
-      run: flake8 src/fincalc.py
+      run: flake8 fincalc.py
 
 
     - name: Executar Linter de Segurança (Bandit)
