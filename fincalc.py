@@ -38,26 +38,6 @@ def calcular_juros_compostos(
     return montante
 
 
-if __name__ == "__main__":
-    print("Iniciando o sistema FinCalc...")
-
-    patrimonio = calcular_aposentadoria(
-        10000.0,
-        500.0,
-        20,
-        6.0
-    )
-    print(
-        f"Patrimônio Estimado para Aposentadoria: R$ {patrimonio:.2f}"
-    )
-
-    montante = calcular_juros_simples(1000.0, 5.0, 2)
-    print(f"Juros Simples: R$ {montante:.2f}")
-
-    montante_comp = calcular_juros_compostos(1000.0, 5.0, 2)
-    print(f"Juros Compostos: R$ {montante_comp:.2f}")
-
-
 def calcular_irrf(
     salario_bruto: float
 ) -> float:
@@ -74,3 +54,34 @@ def calcular_irrf(
 
     else:
         return (salario_bruto * 0.225) - 662.77
+
+
+def calcular_valor_futuro(
+    aporte_mensal: float,
+    taxa_mensal: float,
+    meses: int
+) -> float:
+    """Calcula o valor futuro acumulado com aportes mensais recorrentes."""
+    i = taxa_mensal / 100
+    vf = aporte_mensal * (((1 + i) ** meses - 1) / i)
+    return vf
+
+
+if __name__ == "__main__":
+    print("Iniciando o sistema FinCalc...")
+
+    patrimonio = calcular_aposentadoria(
+        10000.0,
+        500.0,
+        20,
+        6.0
+    )
+    print(f"Patrimônio Estimado para Aposentadoria: R$ {patrimonio:.2f}")
+
+    montante = calcular_juros_simples(1000.0, 5.0, 2)
+    print(f"Juros Simples: R$ {montante:.2f}")
+
+    montante_comp = calcular_juros_compostos(1000.0, 5.0, 2)
+    print(f"Juros Compostos: R$ {montante_comp:.2f}")
+    valor_futuro = calcular_valor_futuro(10.0, 5.0, 2)
+    print(f"Valor futuro: R$ {valor_futuro:.2f}")
