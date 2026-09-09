@@ -37,6 +37,7 @@ def calcular_juros_compostos(
     montante = capital * ((1 + (taxa_anual / 100)) ** anos)
     return montante
 
+
 def calcular_irrf(
     salario_bruto: float
 ) -> float:
@@ -55,11 +56,13 @@ def calcular_irrf(
         return (salario_bruto * 0.225) - 662.77
 
 
-def calcular_depreciacao_linear(valor_inicial: float, valor_residual: float, vida_util_anos: int) -> float:
+def calcular_depreciacao_linear(
+    valor_inicial: float,
+    valor_residual: float,
+    vida_util_anos: int
+) -> float:
     """Calcula o valor de depreciação anual de um ativo corporativo."""
     return (valor_inicial - valor_residual) / vida_util_anos
-
-
 
 
 if __name__ == "__main__":
@@ -86,4 +89,3 @@ if __name__ == "__main__":
 
     calculo_depreciacao_linear = calcular_depreciacao_linear(1000.0, 200.0, 2)
     print(f"Calculo depreciacao linear: R$ {calculo_depreciacao_linear:.2f}")
-
