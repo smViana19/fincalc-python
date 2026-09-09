@@ -87,5 +87,3 @@ if __name__ == "__main__":
     calculo_depreciacao_linear = calcular_depreciacao_linear(1000.0, 200.0, 2)
     print(f"Calculo depreciacao linear: R$ {calculo_depreciacao_linear:.2f}")
 
-
-
