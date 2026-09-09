@@ -66,6 +66,14 @@ def calcular_valor_futuro(
     vf = aporte_mensal * (((1 + i) ** meses - 1) / i)
     return vf
 
+def calcular_depreciacao_linear(
+    valor_inicial: float,
+    valor_residual: float,
+    vida_util_anos: int
+) -> float:
+    """Calcula o valor de depreciação anual de um ativo corporativo."""
+    return (valor_inicial - valor_residual) / vida_util_anos
+
 
 if __name__ == "__main__":
     print("Iniciando o sistema FinCalc...")
@@ -78,6 +86,7 @@ if __name__ == "__main__":
     )
     print(f"Patrimônio Estimado para Aposentadoria: R$ {patrimonio:.2f}")
 
+
     montante = calcular_juros_simples(1000.0, 5.0, 2)
     print(f"Juros Simples: R$ {montante:.2f}")
 
@@ -85,3 +94,10 @@ if __name__ == "__main__":
     print(f"Juros Compostos: R$ {montante_comp:.2f}")
     valor_futuro = calcular_valor_futuro(10.0, 5.0, 2)
     print(f"Valor futuro: R$ {valor_futuro:.2f}")
+
+
+    calculo_irrf = calcular_irrf(1000.0)
+    print(f"Calculo imposto de renda: R$ {calculo_irrf:.2f}")
+
+    calculo_depreciacao_linear = calcular_depreciacao_linear(1000.0, 200.0, 2)
+    print(f"Calculo depreciacao linear: R$ {calculo_depreciacao_linear:.2f}")
