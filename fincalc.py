@@ -1,5 +1,6 @@
 # FinCalc - Sistema de Cálculos Financeiros em Python
 
+
 def calcular_juros_simples(
     capital: float,
     taxa_anual: float,
@@ -35,10 +36,13 @@ def calcular_juros_compostos(
     """Calcula o montante final obtido por juros compostos."""
     if capital < 0:
         raise ValueError("O capital não pode ser negativo.")
+
     if taxa_anual < 0:
         raise ValueError("A taxa anual não pode ser negativa.")
+
     if anos < 0:
         raise ValueError("O número de anos não pode ser negativo.")
+
     montante = capital * ((1 + (taxa_anual / 100)) ** anos)
     return montante
 
@@ -47,7 +51,6 @@ def calcular_irrf(
     salario_bruto: float
 ) -> float:
     """Calcula a alíquota simplificada de Imposto de Renda Retido na Fonte."""
-
     if salario_bruto <= 2259.20:
         return 0.0
 
@@ -94,20 +97,39 @@ def calcular_valor_futuro(
     meses: int
 ) -> float:
     """Calcula o valor futuro acumulado com aportes mensais recorrentes."""
+    if aporte_mensal < 0:
+        raise ValueError("O aporte mensal não pode ser negativo.")
+
+    if meses == 0:
+        return 0.0
+
     i = taxa_mensal / 100
-    vf = aporte_mensal * (((1 + i) ** meses - 1) / i)
-    return vf
+
+    if i == 0:
+        return aporte_mensal * meses
+
+    return (
+        aporte_mensal
+        * (((1 + i) ** meses - 1) / i)
+        * (1 + i)
+    )
 
 
-def calcular_depreciacao_linear(valor_inicial, valor_residual, vida_util):
+def calcular_depreciacao_linear(
+    valor_inicial,
+    valor_residual,
+    vida_util
+):
+    """Calcula a depreciação linear de um ativo."""
     if vida_util <= 0:
         raise ValueError("A vida útil deve ser maior que zero.")
 
     if valor_residual > valor_inicial:
-        raise ValueError("O valor residual não pode ser maior que o valor inicial.")
+        raise ValueError(
+            "O valor residual não pode ser maior que o valor inicial."
+        )
 
     return (valor_inicial - valor_residual) / vida_util
-
 
 
 if __name__ == "__main__":
@@ -119,16 +141,20 @@ if __name__ == "__main__":
         20,
         6.0
     )
-    print(f"Patrimônio Estimado para Aposentadoria: R$ {patrimonio:.2f}")
+    print(
+        f"Patrimônio Estimado para Aposentadoria: "
+        f"R$ {patrimonio:.2f}"
+    )
 
     montante = calcular_juros_simples(1000.0, 5.0, 2)
     print(f"Juros Simples: R$ {montante:.2f}")
+
     montante_comp = calcular_juros_compostos(1000.0, 5.0, 2)
     print(f"Juros Compostos: R$ {montante_comp:.2f}")
+
     valor_futuro = calcular_valor_futuro(10.0, 5.0, 2)
     print(f"Valor futuro: R$ {valor_futuro:.2f}")
 
-    # Teste do cálculo de lucro líquido
     receita = 10000.0
     custos = 4000.0
     despesas = 2000.0
@@ -152,5 +178,12 @@ if __name__ == "__main__":
     calculo_irrf = calcular_irrf(1000.0)
     print(f"Calculo imposto de renda: R$ {calculo_irrf:.2f}")
 
-    calculo_depreciacao_linear = calcular_depreciacao_linear(1000.0, 200.0, 2)
-    print(f"Calculo depreciacao linear: R$ {calculo_depreciacao_linear:.2f}")
+    calculo_depreciacao_linear = calcular_depreciacao_linear(
+        1000.0,
+        200.0,
+        2
+    )
+    print(
+        f"Calculo depreciacao linear: "
+        f"R$ {calculo_depreciacao_linear:.2f}"
+    )
